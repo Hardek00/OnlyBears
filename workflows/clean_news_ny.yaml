@@ -1,0 +1,22 @@
+main:
+  params: []  # Ingen specifik inputparameter krävs för detta exempel
+
+  steps:
+    - call_service:
+        call: http.post
+        args:
+          url: "https://clean-news-app-ny-b3o5cypbia-ew.a.run.app/clean_news/"
+          auth:
+            type: OIDC  # Använd OpenID Connect för autentisering
+          body:
+            project_id: "tomastestproject-433206"
+            dataset: "testdb_1"
+            fetch_table: "raw_news_data"
+            meta_data_table: "raw_news_meta_data"
+          headers:
+            Content-Type: "application/json"
+        result: service_response
+
+    - return_result:
+        return: 
+          - ${service_response.body}

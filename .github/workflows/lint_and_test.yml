@@ -1,0 +1,36 @@
+on:
+  push:
+    branches:
+      - main
+      - testing
+  pull_request:
+    branches:
+      - main
+      - testing
+
+jobs:
+  test:
+    runs-on: ubuntu-latest  # Use the latest Ubuntu image to run the pipeline
+ 
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+        pip install pytest
+
+    - name: Set up Google Cloud SDK
+      uses: google-github-actions/setup-gcloud@v1
+      with:
+        service_account_key: ${{ secrets.BIG_QUERY_SECRET }}  # Your service account key secret
+
+    - name: Run tests
+      run: |
+        pytest  

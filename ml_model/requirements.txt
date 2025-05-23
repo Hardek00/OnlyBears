@@ -1,0 +1,13 @@
+pandas
+numpy
+scikit-learn
+joblib
+fastapi
+uvicorn 
+pydantic
+pandas_market_calendars
+google-cloud-bigquery
+google-cloud-secret-manager
+google-api-core
+google-cloud-storage
+db_dtypes
